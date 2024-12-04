@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
-public class HelloApplication extends Application {
+public class VierGewinntApplication extends Application {
     public static String player1Name;
     public static String player2Name;
 
@@ -19,8 +19,9 @@ public class HelloApplication extends Application {
         player1Name = getPlayerName("Spieler 1");
         player2Name = getPlayerName("Spieler 2");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(VierGewinntApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
+        stage.setResizable(false);
         stage.setTitle("Vier Gewinnt");
         stage.setScene(scene);
         stage.show();

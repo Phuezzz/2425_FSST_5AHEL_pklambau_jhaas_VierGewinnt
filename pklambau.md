@@ -18,3 +18,4 @@ Anforderungen
 Ich möchte es als JavaFX Projekt implementieren.
 
 Ich kann das Application ausführen, jedoch fehlt die Spielernameneingabe vor dem Spielbeginn und wenn vier gleiche Symbole in einer Reihe sind gewinnt kein Spieler!
+Bitte füge unter der Überschrift "Vier Gewinnt", wenn gespielt wird, den Spielernamen des Spielers ein, der aktuell an der Reihe ist.

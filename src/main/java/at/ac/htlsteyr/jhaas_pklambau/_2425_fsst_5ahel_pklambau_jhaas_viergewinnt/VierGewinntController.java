@@ -4,11 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class HelloController {
+public class VierGewinntController {
 
+    public Label Spielertext;
     @FXML
     private GridPane gameBoard;
 
@@ -27,6 +29,7 @@ public class HelloController {
                 gameBoard.add(cell, col, row);
             }
         }
+        Spielertext.setText(VierGewinntApplication.player1Name + " (" + currentPlayer + ")" + " ist an der Reihe!");
     }
 
     public void onColumnClick(ActionEvent actionEvent) {
@@ -51,6 +54,11 @@ public class HelloController {
                 currentPlayer = currentPlayer.equals("Rot") ? "Gelb" : "Rot";
                 break;
             }
+        }
+        if(currentPlayer.equals("Rot")) {
+            Spielertext.setText(VierGewinntApplication.player1Name + " (" + currentPlayer + ")" + " ist an der Reihe!");
+        } else {
+            Spielertext.setText(VierGewinntApplication.player2Name + " (" + currentPlayer + ")" + " ist an der Reihe!");
         }
     }
 
@@ -100,6 +108,11 @@ public class HelloController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Spiel beendet");
         alert.setHeaderText(null);
+        if(currentPlayer.equals("Rot")) {
+            alert.setContentText(VierGewinntApplication.player1Name + " mit der Farbe " + currentPlayer + " hat gewonnen!");
+        } else {
+            alert.setContentText(VierGewinntApplication.player1Name + " mit der Farbe " + currentPlayer + " hat gewonnen!");
+        }
         alert.setContentText("Der Spieler mit dem Symbol " + currentPlayer + " hat gewonnen!");
         alert.showAndWait();
     }
