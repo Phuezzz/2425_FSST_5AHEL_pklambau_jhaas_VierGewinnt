@@ -15,3 +15,6 @@ Anforderungen
     Nach jedem Spielzug muss geprüft werden, ob das Spiel gewonnen wurde. Ist dies der Fall, muss dem Gewinner des Spieles gratuliert werden.
     Außerdem muss geprüft werden, ob das Spiel unentschieden ausgegangen ist. Dies ist dann der Fall, wenn alle Spalten voll sind, und keiner der Spieler 4 Spielsteine in einer Reihe hat. Eine entsprechende Meldung muss ausgegeben werden
 
+Ich möchte es als JavaFX Projekt implementieren.
+
+Ich kann das Application ausführen, jedoch fehlt die Spielernameneingabe vor dem Spielbeginn und wenn vier gleiche Symbole in einer Reihe sind gewinnt kein Spieler!
