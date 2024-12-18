@@ -1,3 +1,6 @@
 # 2425_FSST_5AHEL_pklambau_jhaas_VierGewinnt
 
-Die Standardaufgabe wurde in JavaFX mit den Klassen: Controller, Model und Application implementiert.
+4.12.2024: Gemeinsam: Die Standardaufgabe wurde in JavaFX mit den Klassen: VierGewinntpplication und VierGewinntController implementiert.
+
+18.12.2024: Gemeinsam: Implementierung im Model-View-Controller Prinzips
+

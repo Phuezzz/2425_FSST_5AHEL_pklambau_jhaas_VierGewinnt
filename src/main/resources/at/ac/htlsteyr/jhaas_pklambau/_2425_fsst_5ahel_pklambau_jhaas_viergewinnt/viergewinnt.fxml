@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:controller="at.ac.htlsteyr.jhaas_pklambau._2425_fsst_5ahel_pklambau_jhaas_viergewinnt.VierGewinntController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+  <Label fx:id="playerTurnLabel" text="Spieler ist am Zug:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="7"/>
+  <GridPane fx:id="boardGrid" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="7" hgap="2" vgap="2" style="-fx-border-color: black;">
+    <!-- Dynamisches Spielfeld wird über den Controller erstellt -->
+  </GridPane>
+</GridPane>

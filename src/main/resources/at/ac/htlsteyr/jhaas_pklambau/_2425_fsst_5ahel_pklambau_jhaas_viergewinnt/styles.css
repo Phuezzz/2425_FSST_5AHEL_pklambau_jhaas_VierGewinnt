@@ -1,0 +1,30 @@
+.root {
+    -fx-font-family: Arial, sans-serif;
+    -fx-padding: 10;
+    -fx-background-color: #f0f0f0;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+#playerTurnLabel {
+    -fx-font-size: 20px;
+    -fx-text-fill: #333;
+}
+
+.stack-pane {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-background-color: #d9edf7;
+}
+
+.stack-pane:hover {
+    -fx-background-color: #a9d8e6;
+}
+
+.stack-pane .label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
