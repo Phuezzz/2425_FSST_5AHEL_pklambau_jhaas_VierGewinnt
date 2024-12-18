@@ -97,7 +97,7 @@ public class VierGewinntController {
         }
 
         if (model.checkWin()) {
-            playerTurnLabel.setText(model.getCurrentPlayerName() + " hat gewonnen!");
+            playerTurnLabel.setText(model.getWinningPlayerName() + " hat gewonnen!");
             highlightWinningTokens();
             resetGameAfterDelay();
         } else if (model.isDraw()) {

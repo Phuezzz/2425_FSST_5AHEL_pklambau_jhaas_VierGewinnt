@@ -27,3 +27,4 @@ Nun werden 'x' und 'o' in die jeweiligen Raster geschrieben, wenn man auf die Sp
 
 Ein Problem gibt es noch: Sobald ein Spieler seine letzte Auswahl eingibt, bevor er gewinnt, wird zwar angezeigt, dass dieser Spieler gewonnen hat, jedoch wird dieses Raster nicht mehr in der jeweiligen Farbe eingefärbt.
 Außerdem soll das Spiel nachdem ein Spieler gewonnen hat nach 10 Sekunden resetet werde. Also nur das Spielfeld resetet, die Spieler bleiben die gleichen und die Farben auch.
+Nun haben wir das Problem, dass die 4 Farben in einer Reihe, wenn gewonnen wird, einfach verschwinden, also die Zellen wieder in der Standardfarbe sind. Diese sollen aber bestehen bleiben.

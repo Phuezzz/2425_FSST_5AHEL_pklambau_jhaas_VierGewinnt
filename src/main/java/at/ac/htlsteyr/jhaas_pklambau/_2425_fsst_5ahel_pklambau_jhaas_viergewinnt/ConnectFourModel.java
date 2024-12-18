@@ -13,25 +13,31 @@ public class ConnectFourModel {
     private Color player2Color;
     private boolean isPlayer1Turn;
     private List<int[]> winningTokens;
+    private boolean gameWon;
 
     public ConnectFourModel() {
         board = new char[6][7];  // 6 Zeilen, 7 Spalten
         winningTokens = new ArrayList<>(); // Initialisiere die winningTokens-Liste
+        gameWon = false;  // Zu Beginn ist das Spiel nicht gewonnen
         resetBoard();
         isPlayer1Turn = true;
     }
 
     public void resetBoard() {
+        if (gameWon) {
+            // Wenn das Spiel gewonnen wurde, behalten wir die Gewinnfarben bei
+            return;
+        }
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 board[row][col] = ' ';  // Leeres Feld
             }
         }
-        winningTokens.clear(); // Jetzt funktioniert clear() korrekt, weil winningTokens initialisiert wurde
+        winningTokens.clear(); // Leeren der Gewinnfelder
     }
 
     public boolean dropToken(int column) {
-        if (column < 0 || column >= 7 || isColumnFull(column)) {
+        if (column < 0 || column >= 7 || isColumnFull(column) || gameWon) {
             return false;
         }
 
@@ -55,6 +61,7 @@ public class ConnectFourModel {
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 if (board[row][col] != ' ' && checkDirection(row, col)) {
+                    gameWon = true; // Das Spiel wurde gewonnen
                     return true;
                 }
             }
@@ -67,41 +74,41 @@ public class ConnectFourModel {
 
         // Horizontal
         if (col + 3 < 7 && board[row][col + 1] == currentPlayer && board[row][col + 2] == currentPlayer && board[row][col + 3] == currentPlayer) {
-            winningTokens.add(new int[]{row, col});
-            winningTokens.add(new int[]{row, col + 1});
-            winningTokens.add(new int[]{row, col + 2});
-            winningTokens.add(new int[]{row, col + 3});
+            markWinningTokens(row, col, 0, 1);
             return true;
         }
 
         // Vertikal
         if (row + 3 < 6 && board[row + 1][col] == currentPlayer && board[row + 2][col] == currentPlayer && board[row + 3][col] == currentPlayer) {
-            winningTokens.add(new int[]{row, col});
-            winningTokens.add(new int[]{row + 1, col});
-            winningTokens.add(new int[]{row + 2, col});
-            winningTokens.add(new int[]{row + 3, col});
+            markWinningTokens(row, col, 1, 0);
             return true;
         }
 
         // Diagonal (von unten links nach oben rechts)
         if (row + 3 < 6 && col + 3 < 7 && board[row + 1][col + 1] == currentPlayer && board[row + 2][col + 2] == currentPlayer && board[row + 3][col + 3] == currentPlayer) {
-            winningTokens.add(new int[]{row, col});
-            winningTokens.add(new int[]{row + 1, col + 1});
-            winningTokens.add(new int[]{row + 2, col + 2});
-            winningTokens.add(new int[]{row + 3, col + 3});
+            markWinningTokens(row, col, 1, 1);
             return true;
         }
 
         // Diagonal (von oben links nach unten rechts)
         if (row - 3 >= 0 && col + 3 < 7 && board[row - 1][col + 1] == currentPlayer && board[row - 2][col + 2] == currentPlayer && board[row - 3][col + 3] == currentPlayer) {
-            winningTokens.add(new int[]{row, col});
-            winningTokens.add(new int[]{row - 1, col + 1});
-            winningTokens.add(new int[]{row - 2, col + 2});
-            winningTokens.add(new int[]{row - 3, col + 3});
+            markWinningTokens(row, col, -1, 1);
             return true;
         }
 
         return false;
+    }
+
+    private void markWinningTokens(int startRow, int startCol, int rowIncrement, int colIncrement) {
+        // Markiere die Gewinnreihen und speichere sie in der winningTokens-Liste
+        int row = startRow;
+        int col = startCol;
+
+        for (int i = 0; i < 4; i++) {
+            winningTokens.add(new int[]{row, col});
+            row += rowIncrement;
+            col += colIncrement;
+        }
     }
 
     public boolean isDraw() {
@@ -127,6 +134,10 @@ public class ConnectFourModel {
         return isPlayer1Turn ? player1Name : player2Name;
     }
 
+    public String getWinningPlayerName() {
+        return isPlayer1Turn ? player2Name : player1Name;
+    }
+
     public Color getCurrentPlayerColor() {
         return isPlayer1Turn ? player1Color : player2Color;
     }
@@ -138,6 +149,11 @@ public class ConnectFourModel {
     public List<int[]> getWinningTokens() {
         return winningTokens;
     }
+
+    public boolean isGameWon() {
+        return gameWon;
+    }
 }
+
 
 
