@@ -10,3 +10,6 @@ Vorschau des Spielzuges
 
 18.12.2024: Gemeinsam: 
 Umbau auf Model-View-Controller Prinzip
+
+Haas:
+Vorschau des Spielzuges

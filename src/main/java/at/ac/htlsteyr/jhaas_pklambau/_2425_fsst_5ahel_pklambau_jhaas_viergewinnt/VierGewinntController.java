@@ -3,6 +3,7 @@ package at.ac.htlsteyr.jhaas_pklambau._2425_fsst_5ahel_pklambau_jhaas_viergewinn
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 import javafx.scene.control.TextInputDialog;
@@ -46,6 +47,8 @@ public class VierGewinntController {
                 cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: #e0e0e0;");
                 int finalCol = col; // Effektiv final für Lambda
                 cell.setOnMouseClicked(event -> handleColumnClick(finalCol));
+                cell.setOnMouseEntered(event -> highlightColumn(finalCol));
+                cell.setOnMouseExited(event -> clearHighlight(finalCol));
                 boardGrid.add(cell, col, row);
             }
         }
@@ -88,6 +91,33 @@ public class VierGewinntController {
         for (javafx.scene.Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
                 return node;
+            }
+        }
+        return null;
+    }
+
+    private void highlightColumn(int col) {
+        for (int row = 0; row < model.getROWS(); row++) {
+            Region cell = (Region) getNodeByRowColumnIndex(row, col);
+            if (cell != null) {
+                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: yellow;"); // Reset style
+            }
+        }
+    }
+
+    private void clearHighlight(int col) {
+        for (int row = 0; row < model.getROWS(); row++) {
+            Region cell = (Region) getNodeByRowColumnIndex(row, col);
+            if (cell != null) {
+                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: white;"); // Reset style
+            }
+        }
+    }
+
+    private Region getNodeByRowColumnIndex(int row, int col) {
+        for (var child : boardGrid.getChildren()) {
+            if (GridPane.getRowIndex(child) == row && GridPane.getColumnIndex(child) == col) {
+                return (Region) child;
             }
         }
         return null;

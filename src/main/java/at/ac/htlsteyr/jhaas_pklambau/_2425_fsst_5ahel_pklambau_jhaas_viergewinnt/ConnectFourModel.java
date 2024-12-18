@@ -15,6 +15,14 @@ public class ConnectFourModel {
         }
     }
 
+    public int getROWS() {
+        return ROWS;
+    }
+
+    public int getCOLUMNS() {
+        return COLUMNS;
+    }
+
     public void setPlayerNames(String player1, String player2) {
         this.player1Name = player1;
         this.player2Name = player2;
@@ -81,4 +89,5 @@ public class ConnectFourModel {
         }
         return count == 4;
     }
+
 }
