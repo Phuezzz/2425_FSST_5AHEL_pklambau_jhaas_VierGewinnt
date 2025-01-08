@@ -34,6 +34,6 @@ Phillipp:
 - Es wurde eine ProgressBar für jeden Spieler hinzugefügt.
 
 Haas:
-Vorschau des Spielzuges
-Vorschau nur des Blocks welcher gesetzt wird
-CSS Styles nur über styles.css datei
+- Vorschau des Spielzuges
+- Vorschau nur des Blocks welcher gesetzt wird
+- CSS Styles nur über styles.css datei
