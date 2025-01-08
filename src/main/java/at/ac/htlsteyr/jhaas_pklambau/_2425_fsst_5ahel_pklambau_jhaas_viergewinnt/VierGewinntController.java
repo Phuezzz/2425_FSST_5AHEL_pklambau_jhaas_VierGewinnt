@@ -85,7 +85,7 @@ public class VierGewinntController {
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 StackPane cell = new StackPane();
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: #e0e0e0;");
+                cell.getStyleClass().add("default");
                 int finalCol = col; // Effektiv final für Lambda
                 cell.setOnMouseClicked(event -> handleColumnClick(finalCol));
                 cell.setOnMouseEntered(event -> highlightNextAvailableCell(finalCol));
@@ -168,7 +168,8 @@ public class VierGewinntController {
         if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
             Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: yellow;"); // Highlight
+                cell.getStyleClass().clear();
+                cell.getStyleClass().add("highlight"); // Highlight
             }
         }
     }
@@ -178,7 +179,8 @@ public class VierGewinntController {
         if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
             Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: white;"); // Reset style
+                cell.getStyleClass().clear();
+                cell.getStyleClass().add("default");
             }
         }
     }

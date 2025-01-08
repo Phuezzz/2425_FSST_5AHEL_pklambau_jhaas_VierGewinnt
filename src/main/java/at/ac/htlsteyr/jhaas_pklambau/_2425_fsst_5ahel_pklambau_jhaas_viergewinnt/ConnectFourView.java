@@ -16,7 +16,7 @@ public class ConnectFourView extends GridPane {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
                 StackPane cell = new StackPane();
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50;");
+                cell.getStyleClass().add("default");
                 Label label = new Label();
                 cell.getChildren().add(label);
                 cells[row][col] = label;
