@@ -87,8 +87,8 @@ public class VierGewinntController {
                 cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: #e0e0e0;");
                 int finalCol = col; // Effektiv final für Lambda
                 cell.setOnMouseClicked(event -> handleColumnClick(finalCol));
-                cell.setOnMouseEntered(event -> highlightColumn(finalCol));
-                cell.setOnMouseExited(event -> clearHighlight(finalCol));
+                cell.setOnMouseEntered(event -> highlightNextAvailableCell(finalCol));
+                cell.setOnMouseExited(event -> clearHighlightFromNextAvailableCell(finalCol));
                 boardGrid.add(cell, col, row);
             }
         }
@@ -168,22 +168,33 @@ public class VierGewinntController {
         return null;
     }
 
-    private void highlightColumn(int col) {
-        for (int row = 0; row < model.getROWS(); row++) {
-            Region cell = (Region) getNodeByRowColumnIndex(row, col);
+    private void highlightNextAvailableCell(int col) {
+        int rowToHighlight = getNextAvailableRow(col); // Ermittelt die unterste freie Zeile in der Spalte
+        if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
+            Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: yellow;"); // Reset style
+                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: yellow;"); // Highlight
             }
         }
     }
 
-    private void clearHighlight(int col) {
-        for (int row = 0; row < model.getROWS(); row++) {
-            Region cell = (Region) getNodeByRowColumnIndex(row, col);
+    private void clearHighlightFromNextAvailableCell(int col) {
+        int rowToHighlight = getNextAvailableRow(col); // Ermittelt die unterste freie Zeile in der Spalte
+        if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
+            Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
                 cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: white;"); // Reset style
             }
         }
+    }
+
+    private int getNextAvailableRow(int col) {
+        for (int row = model.getROWS() - 1; row >= 0; row--) { // Von unten nach oben prüfen
+            if (model.isCellFree(row, col)) { // Prüft, ob die Zelle verfügbar ist
+                return row;
+            }
+        }
+        return -1; // Keine verfügbare Zelle gefunden
     }
 
     private Region getNodeByRowColumnIndex(int row, int col) {

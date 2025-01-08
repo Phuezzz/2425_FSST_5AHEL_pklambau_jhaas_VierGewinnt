@@ -14,6 +14,12 @@ public class ConnectFourModel {
     private boolean isPlayer1Turn;
     private List<int[]> winningTokens;
 
+    public int getROWS(){
+        return board.length;
+    }
+    public boolean isCellFree(int row, int col){
+        return board[row][col] == ' ';
+    }
     public ConnectFourModel() {
         board = new char[6][7];  // 6 Zeilen, 7 Spalten
         winningTokens = new ArrayList<>(); // Initialisiere die winningTokens-Liste
