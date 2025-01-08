@@ -11,7 +11,7 @@ public class VierGewinntApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("viergewinnt.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 400, 400);
 
         // CSS-Datei einbinden
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
