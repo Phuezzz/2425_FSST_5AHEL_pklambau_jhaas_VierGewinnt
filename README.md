@@ -34,3 +34,5 @@ Phillipp:
 
 Haas:
 Vorschau des Spielzuges
+Vorschau nur des Blocks welcher gesetzt wird
+CSS Styles nur über styles.css datei
