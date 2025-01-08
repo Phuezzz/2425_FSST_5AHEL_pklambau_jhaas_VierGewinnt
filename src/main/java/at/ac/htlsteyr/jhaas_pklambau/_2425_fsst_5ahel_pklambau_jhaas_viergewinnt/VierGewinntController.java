@@ -169,7 +169,7 @@ public class VierGewinntController {
             int col = pos[1];
             StackPane cell = (StackPane) getNodeFromGridPane(boardGrid, col, row);
             if (cell != null) {
-                Rectangle rect = new Rectangle(50, 50);
+                Rectangle rect = new Rectangle(48, 48);
                 rect.setFill(model.getCurrentPlayerColor());
                 cell.getChildren().add(rect);
                 updateView();
@@ -194,7 +194,7 @@ public class VierGewinntController {
                     cell.getChildren().clear();
                     char symbol = board[row][col];
                     if (symbol == 'o' || symbol == 'x') {
-                        Rectangle rect = new Rectangle(50, 50);
+                        Rectangle rect = new Rectangle(48, 48);
                         rect.setFill(symbol == 'o' ? player1Color : player2Color);
                         cell.getChildren().add(rect);
                     }else{
