@@ -79,6 +79,7 @@ public class VierGewinntController {
         return playerName;
     }
 
+
     private void setupBoardView() {
         char[][] board = model.getBoard();
         for (int row = 0; row < board.length; row++) {
@@ -100,9 +101,8 @@ public class VierGewinntController {
         }
 
         if (model.checkWin()) {
-            playerTurnLabel.setText(model.getCurrentPlayerName() + " hat gewonnen!");
+            playerTurnLabel.setText(model.getWinningPlayerName() + " hat gewonnen!");
             highlightWinningTokens();
-            resetGameAfterDelay();
         } else if (model.isDraw()) {
             playerTurnLabel.setText("Unentschieden!");
         } else {
@@ -120,16 +120,11 @@ public class VierGewinntController {
             if (cell != null) {
                 Rectangle rect = new Rectangle(50, 50);
                 rect.setFill(model.getCurrentPlayerColor());
-                cell.getChildren().clear();
                 cell.getChildren().add(rect);
+                updateView();
+                playerTurnLabel.setText(model.getWinningPlayerName() + " hat Gewonnen!");
             }
         }
-    }
-
-    private void resetGameAfterDelay() {
-        PauseTransition pause = new PauseTransition(Duration.seconds(10));
-        pause.setOnFinished(event -> resetGame());
-        pause.play();
     }
 
     private void resetGame() {
