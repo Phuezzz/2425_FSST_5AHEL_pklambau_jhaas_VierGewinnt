@@ -1,5 +1,7 @@
 package at.ac.htlsteyr.jhaas_pklambau._2425_fsst_5ahel_pklambau_jhaas_viergewinnt;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -20,12 +22,33 @@ public class VierGewinntController {
     private Label playerTurnLabel;
 
     @FXML
+    private Label player1label;
+
+    @FXML
+    private Label player2label;
+
+    @FXML
     private GridPane boardGrid;
+
+    @FXML
+    private Button resetbutton;
+
+    @FXML
+    private Button resetbuttonprogress;
+
+    @FXML
+    private ProgressBar progressbar1;
+
+    @FXML
+    private ProgressBar progressbar2;
 
     private ConnectFourModel model;
 
     private Color player1Color;
     private Color player2Color;
+
+    private double progress1;
+    private double progress2;
 
     @FXML
     public void initialize() {
@@ -37,8 +60,29 @@ public class VierGewinntController {
 
         model.setPlayerNames(player1, player2);
 
+        player1label.setText(player1);
+        player2label.setText(player2);
+
+        progressbar1.setProgress(0);
+        progressbar2.setProgress(0);
+
         setupBoardView();
         updateView();
+
+        resetbutton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                resetGame();
+            }
+        });
+
+        resetbuttonprogress.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                progressbar1.setProgress(0);
+                progressbar2.setProgress(0);
+            }
+        });
     }
 
     private String getPlayerNameAndColor(String defaultName, boolean isPlayer1) {
@@ -102,6 +146,13 @@ public class VierGewinntController {
 
         if (model.checkWin()) {
             playerTurnLabel.setText(model.getWinningPlayerName() + " hat gewonnen!");
+            if(model.getCurrentPlayerName().equals(model.player2Name)) {
+                progress1 += 0.1;
+                progressbar1.setProgress(progress1);
+            }else if(model.getCurrentPlayerName().equals(model.player1Name)) {
+                progress2 += 0.1;
+                progressbar2.setProgress(progress2);
+            }
             highlightWinningTokens();
         } else if (model.isDraw()) {
             playerTurnLabel.setText("Unentschieden!");
@@ -131,8 +182,7 @@ public class VierGewinntController {
         model.resetBoard();  // Board reset im Modell
         updateView();  // View zurücksetzen
         playerTurnLabel.setText("Das Spiel beginnt!");
-
-        // Es ist wichtig, dass der aktuelle Spieler und die Farben erhalten bleiben
+        model.gameWon = false;
     }
 
     private void updateView() {
