@@ -197,6 +197,8 @@ public class VierGewinntController {
                         Rectangle rect = new Rectangle(50, 50);
                         rect.setFill(symbol == 'o' ? player1Color : player2Color);
                         cell.getChildren().add(rect);
+                    }else{
+                        setElementStyle(cell, "default");
                     }
                 }
             }
@@ -215,11 +217,10 @@ public class VierGewinntController {
 
     private void highlightNextAvailableCell(int col) {
         int rowToHighlight = getNextAvailableRow(col); // Ermittelt die unterste freie Zeile in der Spalte
-        if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
+        if (rowToHighlight >= 0 && !model.gameWon) { // Prüfen, ob es eine freie Zeile gibt
             Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.getStyleClass().clear();
-                cell.getStyleClass().add("highlight"); // Highlight
+                setElementStyle(cell, "highlight");
             }
         }
     }
@@ -229,8 +230,7 @@ public class VierGewinntController {
         if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
             Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.getStyleClass().clear();
-                cell.getStyleClass().add("default");
+                setElementStyle(cell, "default");
             }
         }
     }
@@ -252,7 +252,10 @@ public class VierGewinntController {
         }
         return null;
     }
+    private void setElementStyle(Region element, String cssClass){
+        element.getStyleClass().clear();
+        element.setStyle("");
+        element.getStyleClass().add(cssClass);
+    }
 }
-
-
 
