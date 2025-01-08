@@ -29,3 +29,5 @@ Wittner: keine Commits von Haas?
 - Ein Reset Button für das Spiel wäre noch toll
 - Ein Counter, wie oft welcher Spieler gewonnen hat, wäre auch noch toll (Statuszeile)
 - Eine Vorschau, wo der Stein landet, wenn die Maus über das Spielfeld bewegt wird, wäre auch noch toll
+
+Phillipp:
