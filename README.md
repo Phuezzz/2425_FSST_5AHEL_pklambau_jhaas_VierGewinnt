@@ -40,3 +40,12 @@ Haas:
 - Vorschau des Spielzuges
 - Vorschau nur des Blocks welcher gesetzt wird
 - CSS Styles nur über styles.css datei
+
+## 14.01.2025 Wittner:
+- erledigte Punkte mit [done] markieren
+- bei einem Spielgewinn, sollten die "gewinner" Steine hervoorgehoben werden
+- Bei Spielstart muss auch angezeigt werden, welcher Spieler beginnt
+- Die ProgressBars sollten in der Spielerfarbe sein
+- Bei der Anzeige, welcher Spieler an der Reihe ist, sollte auch die Spielerfarbe angezeigt werden
+- Bei der Eingabe der Daten ist egal ob man OK oder Abbrechen drückt ?!
+- Die Einstellungen sollten am Ende des Spiels gespeichert und am Beginn des Spieles geladen werden
