@@ -4,8 +4,32 @@
 <?import javafx.scene.layout.*?>
 
 <GridPane fx:controller="at.ac.htlsteyr.jhaas_pklambau._2425_fsst_5ahel_pklambau_jhaas_viergewinnt.VierGewinntController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-  <Label fx:id="playerTurnLabel" text="Spieler ist am Zug:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="7"/>
-  <GridPane fx:id="boardGrid" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="7" hgap="2" vgap="2" style="-fx-border-color: black;">
-    <!-- Dynamisches Spielfeld wird über den Controller erstellt -->
-  </GridPane>
+  <VBox>
+    <!-- Die HBox für den Player-Turn-Label und den Reset-Button -->
+    <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="7" alignment="CENTER_LEFT">
+      <Label fx:id="playerTurnLabel" text="Spieler ist am Zug:" />
+      <Region HBox.hgrow="ALWAYS"/> <!-- Füllt den Raum zwischen dem Label und dem Reset-Button -->
+      <VBox>
+        <Button fx:id="resetbutton" text="Reset"/> <!-- Reset-Button wird nach rechts verschoben -->
+        <Button fx:id="resetbuttonprogress" text="Reset Progress"/> <!-- Reset-Button wird nach rechts verschoben -->
+      </VBox>
+    </HBox>
+
+    <!-- Spielfeld im GridPane -->
+    <GridPane fx:id="boardGrid" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="7" hgap="2" vgap="2" style="-fx-border-color: black;">
+      <!-- Dynamisches Spielfeld wird über den Controller erstellt -->
+    </GridPane>
+    <HBox>
+      <Label fx:id="player1label"/>
+      <ProgressBar fx:id="progressbar1">
+
+      </ProgressBar>
+      <Region HBox.hgrow="ALWAYS"/> <!-- Füllt den Raum zwischen dem Label und dem Reset-Button -->
+      <Label fx:id="player2label"/>
+      <ProgressBar fx:id="progressbar2">
+
+      </ProgressBar>
+    </HBox>
+  </VBox>
 </GridPane>
+

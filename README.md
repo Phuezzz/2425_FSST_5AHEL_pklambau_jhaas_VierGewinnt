@@ -2,25 +2,23 @@
 
 ## 4.12.2024: 
 Gemeinsam: 
-Die Standardaufgabe wurde mit den Klassen: 
-Controller, Model, View und Main implementiert.
+- Die Standardaufgabe wurde mit den Klassen: 
+- Controller, Model, View und Main implementiert.
 
 Wittner:
-Mausklick auf Spalten ermöglichen (zusätzlich zu Button)
-Anzeige welcher Spieler an der Reihe ist
-Vorschau des Spielzuges
+- Mausklick auf Spalten ermöglichen (zusätzlich zu Button)
+- Anzeige welcher Spieler an der Reihe ist
+- Vorschau des Spielzuges
 
 ## 18.12.2024: 
 Gemeinsam: 
-Umbau auf Model-View-Controller Prinzip
-Mausklick auf Spalten
-Anzeige welcher Spieler an der Reihe ist
+- Umbau auf Model-View-Controller Prinzip
+- Mausklick auf Spalten
+- Anzeige welcher Spieler an der Reihe ist
 
 Phillipp:
-Es wurden 'X' und 'O' in das Raster geschrieben, dies wurde 
-auf Fraben umgeändert.
-Diese Farben können am Anfang nach der Spielernameneingabe 
-ausgewählt werden mittels Colorpicker ausgewählt werden.
+- Es wurden 'X' und 'O' in das Raster geschrieben, dies wurde auf Fraben umgeändert.
+- Diese Farben können am Anfang nach der Spielernameneingabe  ausgewählt werden mittels Colorpicker ausgewählt werden.
 
 Haas:
 Vorschau des Spielzuges
@@ -33,3 +31,12 @@ Wittner: keine Commits von Haas?
 - Ein Counter, wie oft welcher Spieler gewonnen hat, wäre auch noch toll (Statuszeile)
 - Eine Vorschau, wo der Stein landet, wenn die Maus über das Spielfeld bewegt wird, wäre auch noch toll
 
+Phillipp:
+- Beim Sieg wird nun die Meldung ausgegeben und man sieht noch die 4 Gewinnersteine.
+- Es wurde ein Reset Button hinzugefügt, der das Spiel jederzeit neustartet (dabei werden die Spielernamen und Farben beibehalten).
+- Es wurde eine ProgressBar für jeden Spieler hinzugefügt.
+
+Haas:
+- Vorschau des Spielzuges
+- Vorschau nur des Blocks welcher gesetzt wird
+- CSS Styles nur über styles.css datei

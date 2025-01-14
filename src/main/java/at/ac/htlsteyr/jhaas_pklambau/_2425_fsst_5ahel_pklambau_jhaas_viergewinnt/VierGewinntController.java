@@ -1,5 +1,7 @@
 package at.ac.htlsteyr.jhaas_pklambau._2425_fsst_5ahel_pklambau_jhaas_viergewinnt;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -20,12 +22,33 @@ public class VierGewinntController {
     private Label playerTurnLabel;
 
     @FXML
+    private Label player1label;
+
+    @FXML
+    private Label player2label;
+
+    @FXML
     private GridPane boardGrid;
+
+    @FXML
+    private Button resetbutton;
+
+    @FXML
+    private Button resetbuttonprogress;
+
+    @FXML
+    private ProgressBar progressbar1;
+
+    @FXML
+    private ProgressBar progressbar2;
 
     private ConnectFourModel model;
 
     private Color player1Color;
     private Color player2Color;
+
+    private double progress1;
+    private double progress2;
 
     @FXML
     public void initialize() {
@@ -37,8 +60,29 @@ public class VierGewinntController {
 
         model.setPlayerNames(player1, player2);
 
+        player1label.setText(player1);
+        player2label.setText(player2);
+
+        progressbar1.setProgress(0);
+        progressbar2.setProgress(0);
+
         setupBoardView();
         updateView();
+
+        resetbutton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                resetGame();
+            }
+        });
+
+        resetbuttonprogress.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                progressbar1.setProgress(0);
+                progressbar2.setProgress(0);
+            }
+        });
     }
 
     private String getPlayerNameAndColor(String defaultName, boolean isPlayer1) {
@@ -79,16 +123,17 @@ public class VierGewinntController {
         return playerName;
     }
 
+
     private void setupBoardView() {
         char[][] board = model.getBoard();
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 StackPane cell = new StackPane();
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: #e0e0e0;");
+                cell.getStyleClass().add("default");
                 int finalCol = col; // Effektiv final für Lambda
                 cell.setOnMouseClicked(event -> handleColumnClick(finalCol));
-                cell.setOnMouseEntered(event -> highlightColumn(finalCol));
-                cell.setOnMouseExited(event -> clearHighlight(finalCol));
+                cell.setOnMouseEntered(event -> highlightNextAvailableCell(finalCol));
+                cell.setOnMouseExited(event -> clearHighlightFromNextAvailableCell(finalCol));
                 boardGrid.add(cell, col, row);
             }
         }
@@ -101,8 +146,14 @@ public class VierGewinntController {
 
         if (model.checkWin()) {
             playerTurnLabel.setText(model.getWinningPlayerName() + " hat gewonnen!");
+            if(model.getCurrentPlayerName().equals(model.player2Name)) {
+                progress1 += 0.1;
+                progressbar1.setProgress(progress1);
+            }else if(model.getCurrentPlayerName().equals(model.player1Name)) {
+                progress2 += 0.1;
+                progressbar2.setProgress(progress2);
+            }
             highlightWinningTokens();
-            resetGameAfterDelay();
         } else if (model.isDraw()) {
             playerTurnLabel.setText("Unentschieden!");
         } else {
@@ -118,26 +169,20 @@ public class VierGewinntController {
             int col = pos[1];
             StackPane cell = (StackPane) getNodeFromGridPane(boardGrid, col, row);
             if (cell != null) {
-                Rectangle rect = new Rectangle(50, 50);
+                Rectangle rect = new Rectangle(48, 48);
                 rect.setFill(model.getCurrentPlayerColor());
-                cell.getChildren().clear();
                 cell.getChildren().add(rect);
+                updateView();
+                playerTurnLabel.setText(model.getWinningPlayerName() + " hat Gewonnen!");
             }
         }
-    }
-
-    private void resetGameAfterDelay() {
-        PauseTransition pause = new PauseTransition(Duration.seconds(10));
-        pause.setOnFinished(event -> resetGame());
-        pause.play();
     }
 
     private void resetGame() {
         model.resetBoard();  // Board reset im Modell
         updateView();  // View zurücksetzen
         playerTurnLabel.setText("Das Spiel beginnt!");
-
-        // Es ist wichtig, dass der aktuelle Spieler und die Farben erhalten bleiben
+        model.gameWon = false;
     }
 
     private void updateView() {
@@ -149,9 +194,11 @@ public class VierGewinntController {
                     cell.getChildren().clear();
                     char symbol = board[row][col];
                     if (symbol == 'o' || symbol == 'x') {
-                        Rectangle rect = new Rectangle(50, 50);
+                        Rectangle rect = new Rectangle(48, 48);
                         rect.setFill(symbol == 'o' ? player1Color : player2Color);
                         cell.getChildren().add(rect);
+                    }else{
+                        setElementStyle(cell, "default");
                     }
                 }
             }
@@ -168,22 +215,33 @@ public class VierGewinntController {
         return null;
     }
 
-    private void highlightColumn(int col) {
-        for (int row = 0; row < model.getROWS(); row++) {
-            Region cell = (Region) getNodeByRowColumnIndex(row, col);
+    private void highlightNextAvailableCell(int col) {
+        int rowToHighlight = getNextAvailableRow(col); // Ermittelt die unterste freie Zeile in der Spalte
+        if (rowToHighlight >= 0 && !model.gameWon) { // Prüfen, ob es eine freie Zeile gibt
+            Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: yellow;"); // Reset style
+                setElementStyle(cell, "highlight");
             }
         }
     }
 
-    private void clearHighlight(int col) {
-        for (int row = 0; row < model.getROWS(); row++) {
-            Region cell = (Region) getNodeByRowColumnIndex(row, col);
+    private void clearHighlightFromNextAvailableCell(int col) {
+        int rowToHighlight = getNextAvailableRow(col); // Ermittelt die unterste freie Zeile in der Spalte
+        if (rowToHighlight >= 0) { // Prüfen, ob es eine freie Zeile gibt
+            Region cell = (Region) getNodeByRowColumnIndex(rowToHighlight, col);
             if (cell != null) {
-                cell.setStyle("-fx-border-color: black; -fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: white;"); // Reset style
+                setElementStyle(cell, "default");
             }
         }
+    }
+
+    private int getNextAvailableRow(int col) {
+        for (int row = model.getROWS() - 1; row >= 0; row--) { // Von unten nach oben prüfen
+            if (model.isCellFree(row, col)) { // Prüft, ob die Zelle verfügbar ist
+                return row;
+            }
+        }
+        return -1; // Keine verfügbare Zelle gefunden
     }
 
     private Region getNodeByRowColumnIndex(int row, int col) {
@@ -194,7 +252,10 @@ public class VierGewinntController {
         }
         return null;
     }
+    private void setElementStyle(Region element, String cssClass){
+        element.getStyleClass().clear();
+        element.setStyle("");
+        element.getStyleClass().add(cssClass);
+    }
 }
-
-
 

@@ -7,14 +7,20 @@ import java.util.List;
 public class ConnectFourModel {
 
     private char[][] board;
-    private String player1Name;
-    private String player2Name;
+    protected String player1Name;
+    protected String player2Name;
     private Color player1Color;
     private Color player2Color;
     private boolean isPlayer1Turn;
     private List<int[]> winningTokens;
-    private boolean gameWon;
+    protected boolean gameWon;
 
+    public int getROWS(){
+        return board.length;
+    }
+    public boolean isCellFree(int row, int col){
+        return board[row][col] == ' ';
+    }
     public ConnectFourModel() {
         board = new char[6][7];  // 6 Zeilen, 7 Spalten
         winningTokens = new ArrayList<>(); // Initialisiere die winningTokens-Liste
@@ -24,10 +30,6 @@ public class ConnectFourModel {
     }
 
     public void resetBoard() {
-        if (gameWon) {
-            // Wenn das Spiel gewonnen wurde, behalten wir die Gewinnfarben bei
-            return;
-        }
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 board[row][col] = ' ';  // Leeres Feld
