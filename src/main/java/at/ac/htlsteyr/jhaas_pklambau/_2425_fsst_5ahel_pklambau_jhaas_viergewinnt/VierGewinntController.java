@@ -4,12 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import javafx.animation.PauseTransition;
@@ -20,6 +23,9 @@ import javafx.util.Duration;
 public class VierGewinntController {
     @FXML
     private Label playerTurnLabel;
+
+    @FXML
+    private Label playerColorLabel;
 
     @FXML
     private Label player1label;
@@ -175,11 +181,15 @@ public class VierGewinntController {
             int col = pos[1];
             StackPane cell = (StackPane) getNodeFromGridPane(boardGrid, col, row);
             if (cell != null) {
-                Rectangle rect = new Rectangle(48, 48);
-                rect.setFill(model.getCurrentPlayerColor());
+                Rectangle rect = new Rectangle(48, 45);
+                rect.setFill(Color.GREEN);
                 cell.getChildren().add(rect);
-                updateView();
                 playerTurnLabel.setText(model.getWinningPlayerName() + " hat Gewonnen!");
+                if(model.getWinningPlayerName().equals(model.player1Name)){
+                    playerColorLabel.setStyle("-fx-background-color: #" + player1Color.toString().replace("0x", "") + ";");
+                }else{
+                    playerColorLabel.setStyle("-fx-background-color: #" + player2Color.toString().replace("0x", "") + ";");
+                }
             }
         }
     }
@@ -200,7 +210,7 @@ public class VierGewinntController {
                     cell.getChildren().clear();
                     char symbol = board[row][col];
                     if (symbol == 'o' || symbol == 'x') {
-                        Rectangle rect = new Rectangle(48, 48);
+                        Rectangle rect = new Rectangle(48, 45);
                         rect.setFill(symbol == 'o' ? player1Color : player2Color);
                         cell.getChildren().add(rect);
                     }else{
@@ -210,6 +220,11 @@ public class VierGewinntController {
             }
         }
         playerTurnLabel.setText(model.getCurrentPlayerName() + " ist am Zug.");
+        if(model.getCurrentPlayerName().equals(model.player1Name)){
+            playerColorLabel.setStyle("-fx-background-color: #" + player1Color.toString().replace("0x", "") + ";");
+        }else{
+            playerColorLabel.setStyle("-fx-background-color: #" + player2Color.toString().replace("0x", "") + ";");
+        }
     }
 
     private javafx.scene.Node getNodeFromGridPane(GridPane gridPane, int col, int row) {

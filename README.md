@@ -43,14 +43,16 @@ Haas:
 
 ## 14.01.2025 Wittner:
 - erledigte Punkte mit [done] markieren
-- bei einem Spielgewinn, sollten die "gewinner" Steine hervoorgehoben werden
+- bei einem Spielgewinn, sollten die "gewinner" Steine hervoorgehoben werden [done]
 - Bei Spielstart muss auch angezeigt werden, welcher Spieler beginnt [done]
 - Die ProgressBars sollten in der Spielerfarbe sein [done]
-- Bei der Anzeige, welcher Spieler an der Reihe ist, sollte auch die Spielerfarbe angezeigt werden
-- Bei der Eingabe der Daten ist egal ob man OK oder Abbrechen drückt ?!
+- Bei der Anzeige, welcher Spieler an der Reihe ist, sollte auch die Spielerfarbe angezeigt werden [done]
+- Bei der Eingabe der Daten ist egal ob man OK oder Abbrechen drückt ?! [done]
 - Die Einstellungen sollten am Ende des Spiels gespeichert und am Beginn des Spieles geladen werden
 
 ## 15.01.2024:
 Phillipp:
-Bei Spielstart wird nun angezeigt, welcher Spieler beginnt
-Die ProgressBars sind jetzt in der Spielerfarbe
+- Bei Spielstart wird nun angezeigt, welcher Spieler beginnt
+- Die ProgressBars sind jetzt in der Spielerfarbe
+- Bei der Anzeige, welcher Spieler an der Reihe ist, wird nun auch die Spielerfarbe angezeigt
+- Bei einem Spielgewinn, werden die "gewinner" Steine grün hervoorgehoben
