@@ -1,13 +1,86 @@
+/* Standard-Styling für Zellen im Dark-Theme */
 .default {
-    -fx-border-color: black;
+    -fx-border-color: #4d4d4d; /* Dunkler Rand */
     -fx-pref-width: 50px;
     -fx-pref-height: 50px;
-    -fx-background-color: #e0e0e0;
+    -fx-background-color: #2b2b2b; /* Dunkler Hintergrund */
+    -fx-text-fill: #ffffff; /* Weißer Text */
+    -fx-alignment: center; /* Zentrierter Inhalt */
 }
 
+/* Hervorgehobene Zellen (z. B. für Gewinnerkombinationen) */
 .highlight {
-    -fx-border-color: black;
+    -fx-border-color: #f39c12; /* Orangefarbener Rand */
     -fx-pref-width: 50px;
     -fx-pref-height: 50px;
-    -fx-background-color: #3f3d3d;
+    -fx-background-color: #1c1c1c; /* Etwas dunklerer Hintergrund */
+    -fx-text-fill: #f39c12; /* Orangefarbener Text */
+    -fx-alignment: center;
+}
+
+/* Styling für das Spielbrett */
+.board {
+    -fx-border-color: #4d4d4d; /* Dunkler Rahmen um das Spielfeld */
+    -fx-border-width: 2px;
+    -fx-background-color: #1e1e1e; /* Hintergrund für das Spielfeld */
+    -fx-padding: 5px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
+/* Styling für Buttons */
+.button {
+    -fx-background-color: #444; /* Dunkler Button-Hintergrund */
+    -fx-text-fill: #ffffff; /* Weißer Button-Text */
+    -fx-border-color: #4d4d4d; /* Rahmenfarbe */
+    -fx-border-width: 1px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+}
+
+.button:hover {
+    -fx-background-color: #666; /* Hellerer Hintergrund beim Hover */
+}
+
+.button:pressed {
+    -fx-background-color: #333; /* Dunklerer Hintergrund beim Klicken */
+}
+
+/* Styling für den Titel oder Header */
+.header {
+    -fx-font-size: 18px;
+    -fx-text-fill: #f1c40f; /* Goldener Text für Titel */
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+/* Styling für Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff; /* Weißer Text */
+    -fx-padding: 5px;
+}
+
+/* Styling für den Hintergrund des gesamten Spiels */
+.root {
+    -fx-background-color: #121212; /* Sehr dunkler Hintergrund */
+}
+
+.progress-bar {
+    -fx-accent: #4caf50; /* Grün für den Fortschritt */
+    -fx-control-inner-background: #2b2b2b; /* Dunkler Hintergrund des Fortschrittsbalkens */
+    -fx-background-color: #1e1e1e; /* Rahmenfarbe des Fortschrittsbalkens */
+    -fx-border-color: #4d4d4d; /* Rahmen des Fortschrittsbalkens */
+    -fx-border-width: 1px;
+    -fx-padding: 3px;
+}
+
+.progress-bar .track {
+    -fx-background-color: #1e1e1e; /* Hintergrund der Spur */
+}
+
+.progress-bar .bar {
+    -fx-background-color: #4caf50; /* Fortschrittsfarbe */
 }
