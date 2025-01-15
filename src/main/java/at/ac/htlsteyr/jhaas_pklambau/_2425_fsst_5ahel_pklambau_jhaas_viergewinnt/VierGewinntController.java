@@ -120,6 +120,12 @@ public class VierGewinntController {
             }
         }
 
+        if(isPlayer1){
+            progressbar1.setStyle("-fx-accent: #" + player1Color.toString().replace("0x", "") + ";");
+        }else{
+            progressbar2.setStyle("-fx-accent: #" + player2Color.toString().replace("0x", "") + ";");
+        }
+
         return playerName;
     }
 
@@ -181,7 +187,7 @@ public class VierGewinntController {
     private void resetGame() {
         model.resetBoard();  // Board reset im Modell
         updateView();  // View zurücksetzen
-        playerTurnLabel.setText("Das Spiel beginnt!");
+        playerTurnLabel.setText(model.getCurrentPlayerName() + " ist am Zug.");
         model.gameWon = false;
     }
 
