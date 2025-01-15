@@ -54,3 +54,6 @@ Haas:
 Phillipp:
 Bei Spielstart wird nun angezeigt, welcher Spieler beginnt
 Die ProgressBars sind jetzt in der Spielerfarbe
+
+Johannes:
+Eingabedialogfelder, Wenn nicht ok gedrückt wird wird das Programm beendet.
