@@ -56,3 +56,8 @@ Phillipp:
 - Die ProgressBars sind jetzt in der Spielerfarbe
 - Bei der Anzeige, welcher Spieler an der Reihe ist, wird nun auch die Spielerfarbe angezeigt
 - Bei einem Spielgewinn, werden die "gewinner" Steine grün hervoorgehoben
+Bei Spielstart wird nun angezeigt, welcher Spieler beginnt
+Die ProgressBars sind jetzt in der Spielerfarbe
+
+Johannes:
+Eingabedialogfelder, Wenn nicht ok gedrückt wird wird das Programm beendet.

@@ -61,13 +61,17 @@ public class VierGewinntController {
         model = new ConnectFourModel();
 
         // Spielernamen und Farben abfragen
-        String player1 = getPlayerNameAndColor("Spieler 1", true);
-        String player2 = getPlayerNameAndColor("Spieler 2", false);
+        try{
+            String player1 = getPlayerNameAndColor("Spieler 1", true);
+            String player2 = getPlayerNameAndColor("Spieler 2", false);
 
-        model.setPlayerNames(player1, player2);
+            model.setPlayerNames(player1, player2);
 
-        player1label.setText(player1);
-        player2label.setText(player2);
+            player1label.setText(player1);
+            player2label.setText(player2);
+        }catch(DialogCancelledException e){
+            System.exit(0);
+        }
 
         progressbar1.setProgress(0);
         progressbar2.setProgress(0);
@@ -91,13 +95,19 @@ public class VierGewinntController {
         });
     }
 
-    private String getPlayerNameAndColor(String defaultName, boolean isPlayer1) {
+    private String getPlayerNameAndColor(String defaultName, boolean isPlayer1) throws DialogCancelledException{
         TextInputDialog dialog = new TextInputDialog(defaultName);
         dialog.setTitle("Spielername eingeben");
         dialog.setHeaderText("Gib den Namen für " + defaultName + " ein:");
         dialog.setContentText("Name:");
 
-        String playerName = dialog.showAndWait().orElse(defaultName);
+        Optional<String> nameDialogResult = dialog.showAndWait();
+
+        if (!nameDialogResult.isPresent()) {
+            throw new DialogCancelledException("Cancelled Name Selection");
+        }
+
+        String playerName = nameDialogResult.get();
 
         // Farbauswahl-Dialog erstellen
         ColorPicker colorPicker = new ColorPicker();
@@ -107,7 +117,7 @@ public class VierGewinntController {
         colorDialog.setTitle("Farbe auswählen");
         colorDialog.setHeaderText("Wähle eine Farbe für " + playerName + ":");
         colorDialog.getDialogPane().setContent(colorPicker);
-        colorDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        colorDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
 
         // Zeige den Farbdialog und speichere die gewählte Farbe
         Optional<ButtonType> result = colorDialog.showAndWait();
@@ -118,12 +128,7 @@ public class VierGewinntController {
                 player2Color = colorPicker.getValue();
             }
         } else {
-            // Falls der Benutzer abbricht, Standardfarbe setzen
-            if (isPlayer1) {
-                player1Color = Color.RED;
-            } else {
-                player2Color = Color.YELLOW;
-            }
+            throw new DialogCancelledException("Cancelled Color Selection");
         }
 
         if(isPlayer1){
