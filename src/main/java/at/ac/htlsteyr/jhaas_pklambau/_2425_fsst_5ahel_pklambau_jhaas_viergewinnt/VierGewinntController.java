@@ -186,7 +186,7 @@ public class VierGewinntController {
             int col = pos[1];
             StackPane cell = (StackPane) getNodeFromGridPane(boardGrid, col, row);
             if (cell != null) {
-                Rectangle rect = new Rectangle(48, 45);
+                Rectangle rect = new Rectangle(48, 48);
                 rect.setFill(Color.GREEN);
                 cell.getChildren().add(rect);
                 playerTurnLabel.setText(model.getWinningPlayerName() + " hat Gewonnen!");
@@ -215,7 +215,7 @@ public class VierGewinntController {
                     cell.getChildren().clear();
                     char symbol = board[row][col];
                     if (symbol == 'o' || symbol == 'x') {
-                        Rectangle rect = new Rectangle(48, 45);
+                        Rectangle rect = new Rectangle(48, 48);
                         rect.setFill(symbol == 'o' ? player1Color : player2Color);
                         cell.getChildren().add(rect);
                     }else{

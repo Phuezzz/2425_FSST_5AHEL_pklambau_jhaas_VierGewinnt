@@ -58,4 +58,4 @@ Phillipp:
 - Bei einem Spielgewinn, werden die "gewinner" Steine grün hervoorgehoben
 
 Johannes:
-Eingabedialogfelder, Wenn nicht ok gedrückt wird wird das Programm beendet.
+- Eingabedialogfelder, Wenn nicht ok gedrückt wird wird das Programm beendet.
